@@ -55,7 +55,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   }
   else if (request.action == 'trackAd') {
     if (settings.get('enable_ads')) {
-      if (request.browserWidth > 1650) {
+      if (request.browserWidth > 1200) {
         _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
         _gaq.push(['_trackEvent', 'Ads', 'Browsersize', 'ok', request.browserWidth])
       } else {
