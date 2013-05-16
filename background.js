@@ -67,4 +67,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
       _gaq.push(['_trackEvent', 'Ads', 'disabled', 'true'])
     }
   }
+  else if (request.action == 'trackSSL') {
+    _gaq.push(['_trackEvent', 'Ads', 'SSL', request.SSLenabled.toString()])
+  }
 })
