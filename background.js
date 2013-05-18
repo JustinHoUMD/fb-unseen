@@ -55,12 +55,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   }
   else if (request.action == 'trackAd') {
     if (settings.get('enable_ads')) {
-      if (request.browserWidth > 1500) {
+      if (request.browserWidth > 1600 && !request.SSLenabled) {
         _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
         _gaq.push(['_trackEvent', 'Ads', 'Browsersize', 'ok', request.browserWidth])
-      } else {
+      } else if (!(request.browserWidth > 1600)) {
         _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
         _gaq.push(['_trackEvent', 'Ads', 'Browsersize', 'too_small', request.browserWidth])
+      } else {
+        _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
       }
     } else {
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
