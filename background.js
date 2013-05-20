@@ -42,6 +42,13 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   else if (request.action == 'getDisableButton') {
     sendResponse(localStorage['force_disable_button'])
   }
+  else if (request.action == 'getOverlayChoice') {
+    if (!settings.get('enable_ads')) {
+      sendResponse('disable');
+      return;
+    }
+    sendResponse(localStorage['overlay_choice'])
+  }
   else if (request.action == 'setDisableButton') {
     localStorage['force_disable_button'] = 'true'
     chrome.tabs.create({url: 'http://swege.github.io/fb-unseen/', active: false})
@@ -66,12 +73,22 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
       }
       */
+      _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
     } else {
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
-      _gaq.push(['_trackEvent', 'Ads', 'disabled', 'true'])
+      //_gaq.push(['_trackEvent', 'Ads', 'disabled', 'true'])
     }
   }
   else if (request.action == 'trackSSL') {
     _gaq.push(['_trackEvent', 'Ads', 'SSL', request.SSLenabled.toString()])
+  }
+  else if (request.action == 'AdChoice') {
+    _gaq.push(['_trackEvent', 'Ads', 'Choice', request.choice])
+    localStorage['overlay_choice'] = request.choice;
+    if (request.choice == 'enable') {
+      settings.set('enable_ads', true)
+    } else {
+      settings.set('enable_ads', false)
+    }
   }
 })
