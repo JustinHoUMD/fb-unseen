@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  chrome.extension.sendRequest({action: 'getOverlayChoice'}, function(choice) {
-    if (choice == 'enable' || choice == 'disable') {
+  chrome.extension.sendRequest({action: 'getOverlayConfirmation'}, function(confirmation) {
+    // Overlay was already showed to the user or ads were explicitly disabled
+    if (confirmation == 'true') {
       return;
     }
     $('html > head').append($('<style> \
@@ -42,24 +43,20 @@ $(document).ready(function() {
       } \
       </style>'));
     $('html > body').prepend($('<div id="fb-unseen-overlay"><div id="fb-unseen-container"> \
-      <h2>FB unseen</h2> \
+      <h2>FB unseen — Information</h2> \
       <p>Thank you for using FB unseen. This extension is free and I develop it \
       in my spare time, but it would be great to earn a bit revenue from it.</p> \
-      <p>Do you allow me to insert additional ads on facebook? The ad is a box, \
+      <p>FB unseen is now inserting an additional ad into facebook. The ad is a box, \
       sliding in from the bottom left edge into the page containing a banner.</p> \
       <img src="' + chrome.extension.getURL('images/icon_options.png') + '" /> \
-      <p>You can change this setting at any time in the options of FB unseen. </p> \
+      <p>If the ad is too annoying, feel free to disable it at any time in \
+      the options of FB unseen. </p> \
       <div id="fb-unseen-buttons"> \
-        <a class="inputbutton" id="disable_ads">No, don’t show me ads</a> \
-        <a class="inputbutton" id="enable_ads">Yes, enable ads</a> \
+        <a class="inputbutton" id="confirm_ads">Ok, got it</a> \
       </div> \
       </div></div>'));
-    $('#disable_ads').click(function() {
-      chrome.extension.sendRequest({action: 'AdChoice', choice: 'disable'});
-      $('#fb-unseen-overlay').hide();
-    });
-    $('#enable_ads').click(function() {
-      chrome.extension.sendRequest({action: 'AdChoice', choice: 'enable'});
+    $('#confirm_ads').click(function() {
+      chrome.extension.sendRequest({action: 'ConfirmAdInformation'});
       $('#fb-unseen-overlay').hide();
     });
   })

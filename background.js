@@ -42,12 +42,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   else if (request.action == 'getDisableButton') {
     sendResponse(localStorage['force_disable_button'])
   }
-  else if (request.action == 'getOverlayChoice') {
+  else if (request.action == 'getOverlayConfirmation') {
     if (!settings.get('enable_ads')) {
-      sendResponse('disable');
+      sendResponse('true');
       return;
     }
-    sendResponse(localStorage['overlay_choice'])
+    sendResponse(localStorage['overlay_confirmed'])
   }
   else if (request.action == 'setDisableButton') {
     localStorage['force_disable_button'] = 'true'
@@ -82,13 +82,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   else if (request.action == 'trackSSL') {
     _gaq.push(['_trackEvent', 'Ads', 'SSL', request.SSLenabled.toString()])
   }
-  else if (request.action == 'AdChoice') {
-    _gaq.push(['_trackEvent', 'Ads', 'Choice', request.choice])
-    localStorage['overlay_choice'] = request.choice;
-    if (request.choice == 'enable') {
-      settings.set('enable_ads', true)
-    } else {
-      settings.set('enable_ads', false)
-    }
+  else if (request.action == 'ConfirmAdInformation') {
+    _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation'])
+    localStorage['overlay_confirmed'] = 'true';
   }
 })
