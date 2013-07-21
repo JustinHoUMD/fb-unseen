@@ -43,16 +43,17 @@ $(document).ready(function() {
       } \
       </style>'));
     $('html > body').prepend($('<div id="fb-unseen-overlay"><div id="fb-unseen-container"> \
-      <h2>FB unseen — Information</h2> \
+      <h2>FB unseen — Important Information</h2> \
       <p>Thank you for using FB unseen. This extension is free and I develop it \
       in my spare time, but it would be great to earn a bit revenue from it.</p> \
-      <p>FB unseen is now inserting an additional ad into facebook. The ad is a box, \
-      sliding in from the bottom left edge into the page containing a banner.</p> \
+      <p>FB unseen is now inserting <strong>an additional ad</strong> into facebook. The ad is a box, \
+      sliding in from the <strong>bottom left edge</strong> into the page containing a banner.</p> \
       <img src="' + chrome.extension.getURL('images/icon_options.png') + '" /> \
-      <p>If the ad is too annoying, feel free to disable it at any time in \
-      the options of FB unseen. </p> \
+      <p>If the ad is too annoying, feel free to <strong>disable</strong> it at any time in \
+      the <strong>options</strong> of FB unseen.</p> \
+      <p>By the way, the “Mark as read” button is back, I hope it works for everyone of you :)</p> \
       <div id="fb-unseen-buttons"> \
-        <a class="inputbutton" id="confirm_ads">Ok, got it</a> \
+        <a class="inputbutton" id="confirm_ads">Okay, got it</a> \
       </div> \
       </div></div>'));
     $('#confirm_ads').click(function() {
