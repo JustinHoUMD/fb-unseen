@@ -62,28 +62,19 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   }
   else if (request.action == 'trackAd') {
     if (settings.get('enable_ads')) {
-      /*
-      if (request.browserWidth > 1600 && !request.SSLenabled) {
-        _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
-        _gaq.push(['_trackEvent', 'Ads', 'Browsersize', 'ok', request.browserWidth])
-      } else if (!(request.browserWidth > 1600)) {
-        _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
-        _gaq.push(['_trackEvent', 'Ads', 'Browsersize', 'too_small', request.browserWidth])
-      } else {
-        _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
-      }
-      */
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
     } else {
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
-      //_gaq.push(['_trackEvent', 'Ads', 'disabled', 'true'])
     }
   }
   else if (request.action == 'trackSSL') {
-    _gaq.push(['_trackEvent', 'Ads', 'SSL', request.SSLenabled.toString()])
+    _gaq.push(['_trackEvent', 'Meta', 'SSL', request.SSLenabled.toString()])
   }
   else if (request.action == 'ConfirmAdInformation') {
     _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation'])
     localStorage['overlay_confirmed'] = 'true';
+  }
+  else if (request.action == 'trackMarkAsRead') {
+    _gaq.push(['_trackEvent', 'MarkAsRead', 'clicked']);
   }
 })
