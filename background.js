@@ -71,8 +71,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     _gaq.push(['_trackEvent', 'Meta', 'SSL', request.SSLenabled.toString()])
   }
   else if (request.action == 'ConfirmAdInformation') {
-    _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation'])
+    _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation', 'ok'])
     localStorage['overlay_confirmed'] = 'true';
+  }
+  else if (request.action == 'SkippedAdInformation') {
+    _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation', 'skipped'])
+    localStorage['overlay_skipped'] = 'true';
   }
   else if (request.action == 'trackMarkAsRead') {
     _gaq.push(['_trackEvent', 'MarkAsRead', 'clicked']);

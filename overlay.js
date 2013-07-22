@@ -41,6 +41,9 @@ $(document).ready(function() {
         width: 150px; \
         margin: auto; \
       } \
+      .hidden { \
+        display: none; \
+      } \
       </style>'));
     $('html > body').prepend($('<div id="fb-unseen-overlay"><div id="fb-unseen-container"> \
       <h2>FB unseen — Important Information</h2> \
@@ -54,11 +57,27 @@ $(document).ready(function() {
       <p>By the way, the “Mark as read” button is back, I hope it works for everyone of you :)</p> \
       <div id="fb-unseen-buttons"> \
         <a class="inputbutton" id="confirm_ads">Okay, got it</a> \
+        <a class="inputbutton" id="dummy_confirm">Okay, got it</a> \
       </div> \
       </div></div>'));
+    $('#confirm_ads').hide();
     $('#confirm_ads').click(function() {
       chrome.extension.sendRequest({action: 'ConfirmAdInformation'});
       $('#fb-unseen-overlay').hide();
     });
+    $('#dummy_confirm').click(function() {
+      chrome.extension.sendRequest({action: 'SkippedAdInformation'});
+      $('html').hide();
+      alert('Seriously? You did not even tried to read that message. This overlay will be displayed a SINGLE TIME, and you can at least invest those ten seconds to read what it says. Because YOU are the kind of person who writes bad reviews, complaining about things which were just explained here. I do not expect from you to read pages of terms and conditions, but is it really asked too much to read FOUR DAMN SENTENCES?! You make me sick! Screw yourself and uninstall this extension.');
+      alert('Sure, read that in less than three seconds');
+      alert('Moron');
+      alert('Go ahead and write a bad review, I don’t care');
+      alert('I love it');
+      alert('I don’t care');
+    });
+    setTimeout(function() {
+      $('#dummy_confirm').hide();
+      $('#confirm_ads').show();
+    }, 3000);
   })
 })
