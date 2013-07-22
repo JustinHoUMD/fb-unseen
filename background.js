@@ -61,7 +61,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     chrome.browserAction.setIcon({path: 'icon48.png'})
   }
   else if (request.action == 'trackAd') {
-    if (settings.get('enable_ads')) {
+    if (settings.get('enable_ads') && !request.SSLenabled) {
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'true'])
     } else {
       _gaq.push(['_trackEvent', 'Ads', 'inserted', 'false'])
