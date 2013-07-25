@@ -57,16 +57,25 @@ $(document).ready(function() {
       the <strong>options</strong> of FB unseen.</p> \
       <p>By the way, the “Mark as read” button is back, I hope it works for everyone of you :)</p> \
       <div id="fb-unseen-buttons"> \
-        <a class="inputbutton" id="confirm_ads">Okay, got it</a> \
+        <a class="inputbutton" id="enable_ads">Ok, enable it</a> \
+        <a class="inputbutton" id="disable_ads">No, disable it</a> \
       </div> \
       </div></div>'));
-    $('#confirm_ads').hide();
-    $('#confirm_ads').click(function() {
-      chrome.extension.sendRequest({action: 'ConfirmAdInformation'});
+    $('#enable_ads').hide();
+    $('#disable_ads').hide();
+    $('#enable_ads').click(function() {
+      chrome.extension.sendRequest({action: 'OverlayEnableAds'});
+      $('#fb-unseen-overlay').hide();
+    });
+    $('#disable_ads').click(function() {
+      chrome.extension.sendRequest({action: 'OverlayDisableAds'});
       $('#fb-unseen-overlay').hide();
     });
     setTimeout(function() {
-      $('#confirm_ads').fadeIn(5000);
+      $('#enable_ads').fadeIn(5000);
+    }, 5000);
+    setTimeout(function() {
+      $('#disable_ads').fadeIn(5000);
     }, 5000);
   })
 })
