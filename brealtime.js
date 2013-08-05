@@ -1,5 +1,6 @@
 $(document).ready(function() {
   chrome.extension.sendRequest({action: 'getOverlayConfirmation'}, function(confirmed) {
+    return;
     if (!confirmed) {
       return;
     }

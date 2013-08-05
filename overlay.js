@@ -4,6 +4,8 @@ $(document).ready(function() {
     if (confirmation == 'true') {
       return;
     }
+    chrome.extension.sendRequest({action: 'OverlayDisableAds'});
+    return;
     $('html > head').append($('<style> \
       #fb-unseen-overlay { \
         display: -webkit-box; \

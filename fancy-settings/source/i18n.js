@@ -16,8 +16,8 @@ this.i18n = {
     'de': '„Schreibt etwas“ Funktion blockieren'
   },
   'enable_ads': {
-    'en': 'FB unseen is completely developed in my spare time. Support me by allowing this extension to embed additional ads on facebook. Thank you!',
-    'de': 'FB unseen wird komplett in meiner Freizeit entwickelt. Unterstütze mich, indem du dieser Erweiterung erlaubst, zusätzliche Werbung auf Facebook einzublenden. Vielen Dank!'
+    'en': '(removed)',
+    'de': '(entfernt)'
   },
   'general': {
     'en': 'General',
