@@ -1,6 +1,6 @@
 {
   "name": "FB unseen",
-  "version": "0.1.7.8",
+  "version": "0.1.7.10",
   "manifest_version": 2,
   "description": "Blocks the ”seen” feature of the facebook messenger.",
   "background": {
