@@ -1,7 +1,9 @@
 $(document).ready(function() {
   chrome.extension.sendRequest({action: 'getOverlayConfirmation'}, function(confirmation) {
     // Overlay was already showed to the user or ads were explicitly disabled
-    if (confirmation == 'true') {
+    if (confirmation == 'true' || document.URL.indexOf('facebook.com/login.php') != -1 ||
+                                  document.URL.indexOf('facebook.com/dialog') != -1 ||
+                                  document.URL.indexOf('facebook.com/sharer') != -1) {
       return;
     }
     $('html > head').append($('<style> \
