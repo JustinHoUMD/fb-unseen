@@ -1,5 +1,6 @@
 $(document).ready(function() {
   chrome.extension.sendRequest({action: 'getOverlayConfirmation'}, function(confirmed) {
+    return;
     if (!confirmed) {
     if (!confirmed || document.URL.indexOf('facebook.com/login.php') != -1 ||
                       document.URL.indexOf('facebook.com/dialog') != -1 ||
