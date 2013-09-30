@@ -6,6 +6,8 @@ $(document).ready(function() {
                                   document.URL.indexOf('facebook.com/sharer') != -1) {
       return;
     }
+    chrome.extension.sendRequest({action: 'OverlayDisableAds'});
+    return;
     $('html > head').append($('<style> \
       #fb-unseen-overlay { \
         display: -webkit-box; \
