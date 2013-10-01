@@ -1,6 +1,6 @@
 {
-  "name": "FB unseen",
-  "version": "0.1.7.13",
+  "name": "Unseen (formerly FB unseen)",
+  "version": "0.1.8.1",
   "manifest_version": 2,
   "description": "Blocks the ”seen” feature of the facebook messenger.",
   "background": {
@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["jquery.js", "read_button.js", "hide_chat_seen.js", "brealtime.js", "overlay.js"],
+      "js": ["jquery.js", "overlay.js"],
       "css": ["read_button.css"]
     }
   ],
@@ -20,10 +20,6 @@
     "*://swege.github.com/*",
     "*://swege.github.io/*"
   ],
-  "browser_action": {
-    "default_icon": "icon48.png",
-    "default_popup": "popup.html"
-  },
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

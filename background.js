@@ -20,18 +20,18 @@ var settings = new Store('settings', {
 })
 
 if (!settings.get('block_chat_seen')) {
-  chrome.browserAction.setIcon({path: 'icon48.disabled.png'})
+  // chrome.browserAction.setIcon({path: 'icon48.disabled.png'})
 }
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
   return {
-    cancel: settings.get('block_chat_seen')
+    cancel: false // XXX settings.get('block_chat_seen')
   }
 }, { urls: ['*://*.facebook.com/*change_read_status*'] }, ['blocking'])
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
   return {
-    cancel: settings.get('block_typing_indicator')
+    cancel: false // XXX settings.get('block_typing_indicator')
   }
 }, { urls: ['*://*.facebook.com/*typ.php*'] }, ['blocking'])
 
@@ -43,11 +43,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     sendResponse(localStorage['force_disable_button'])
   }
   else if (request.action == 'getOverlayConfirmation') {
-    if (!settings.get('enable_ads')) {
-      sendResponse('true');
-      return;
-    }
-    sendResponse(localStorage['overlay_confirmed'])
+    sendResponse(localStorage['disable_forever'])
   }
   else if (request.action == 'setDisableButton') {
     localStorage['force_disable_button'] = 'true'
@@ -55,10 +51,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     _gaq.push(['_trackEvent', 'Mark as read', 'forceDisable'])
   }
   else if (request.action == 'quickDisable') {
-    chrome.browserAction.setIcon({path: 'icon48.disabled.png'})
+    // chrome.browserAction.setIcon({path: 'icon48.disabled.png'})
   }
   else if (request.action == 'quickEnable') {
-    chrome.browserAction.setIcon({path: 'icon48.png'})
+    // chrome.browserAction.setIcon({path: 'icon48.png'})
   }
   else if (request.action == 'trackAd') {
     if (settings.get('enable_ads') && !request.SSLenabled) {
@@ -79,6 +75,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     _gaq.push(['_trackEvent', 'Ads', 'ConfirmAdInformation', 'disable']);
     settings.set('enable_ads', false);
     localStorage['overlay_confirmed'] = 'true';
+  }
+  else if (request.action == 'DisableForever') {
+    _gaq.push(['_trackEvent', 'Meta', 'DisableForever']);
+    localStorage['disable_forever'] = 'true';
   }
   else if (request.action == 'trackMarkAsRead') {
     _gaq.push(['_trackEvent', 'MarkAsRead', 'clicked']);
